@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Timecard</title>
+    
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js" type="text/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script type="text/javascript" src="assets/javascript/test1.js"></script>
+    
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style copy.css">
+        <title>Test</title>
+        <script
+  src="http://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid">
+        <div class="big-container">
+          <h1 class="display-4">Groupon / Yelp Integration</h1>
+          <p class="lead">Best Place to Find Restaurant Deals</p>
+        </div>
+        </div>
+
+        <div class="card border-secondary mb-3">
+            <div class="card-header">Current Deals</div>
+            <div class="card-body text-secondary">
+                    <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col">Restaurant</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Rating</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Open Now?</th>
+                                <th scope="col"># of Yelp Reviews</th>
+                                <th scope="col">Deal</th>
+                              </tr>
+                            </thead>
+                            <tbody id="resultsDiv">
+                            </tbody>
+                          </table>
+
+            </div>
+        </div>
+
+    </div>  
+</body>
+</html>
