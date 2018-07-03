@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Combined</title>
+        <script
+  src="http://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <p>Use Console to see results </p>
+
+        <form id="zip-form">
+            <input type="text" id="zipCode" placeholder="92131">
+            <input id="getLoc" type="submit" value="Submit">
+        </form>
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script>
+   var zip ="92121";
+   var grpnLocStr="";
+        
+        // This segment gets zipcode, and and then processes it into lat and long for Groupon (who doesn't take zip codes :( ))
+
+$("#getLoc").on("click", function (event) {
+  event.preventDefault();
+
+    zip = $("#zipCode").val().trim();
+    console.log("entered zip: ", zip);
+
+    // need to add test for bad values and just blank
+
+
+    var zurl = "https://www.zipcodeapi.com/rest/NnhKKXxjVlQfKghOtdW83dPHEUYPi8K41sMduv0tzFaf0M5GitUpmwyv1S3pA9xn/info.json/"+zip+"/degrees";
+
+            $.ajax(zurl)
+                .then(function (zipOut) {
+                    console.log("GPS: ", zipOut);
+                    grpnLocStr="&lat="+zipOut.lat+"&lng="+zipOut.lng
+                    console.log("Groupon Location String: ", grpnLocStr);
+                    console.log("city name: ",zipOut.city)
+
+                    // GROUPON
+                    var response ={};
+                    var glimit = 10;
+                    var url = "https://partner-api.groupon.com/deals.json?tsToken=US_AFF_0_201236_212556_0"+grpnLocStr+"&filters=category:food-and-drink&offset=0&limit="+glimit
+                    $.ajax(url)
+                    .then(function (response) {
+                        console.log("Groupon Full",response);
+                    });
+                
+                });
+
+
+
+
+});
+// <!-- 
+
+
+
+//             // YELP
+//             var term="food"
+//             var zip ="92121"
+//             var ylimit =10;
+//             var yurl = 'https://api.yelp.com/v3/businesses/search?limit='+ylimit+'&term='+term+'&location='+zip
+
+
+            
+
+//             // ############ PREFILTER _ THANKS CARL ############################
+
+            $.ajaxPrefilter(function(options) {
+                if (options.crossDomain && $.support.cors) {
+                    options.url = 'https://ucsdcodingcampgp1.herokuapp.com/' + options.url;
+                }
+            });
+            
+//             // ############ GROUPON CODE ###########################
+
+
+
+
+//             // ############ YELP CODE ###########################
+
+
+            
+//             $.ajax(yurl, { headers: { Authorization: 'Bearer IOnOmcVyQA7g8bfItyRwB1JFyfXeJh0kXRqdwyKUjuxOP2LmvLLth68IN84LwKiAUSgtQN5Bikqdnm70id-_Sj_0U5vTewXNl7ycBkUayA45WB-ozhQ2VEq7-6AuW3Yx' }})
+//                 .then(response => console.log('YELP ', response))
+
+//             // ############ ZIP CODE to Lattitude/longitude ###########################
+
+
+
+
+        </script>
+    </body>
+</html>
