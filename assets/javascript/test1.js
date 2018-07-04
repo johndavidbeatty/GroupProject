@@ -1,5 +1,4 @@
-// This version formats output for http link on deal.  
-// Deals show up, but don't match the company data
+// This version totally works but grabs everything serially
 
 $(document).ready(function () {
     var saveit = [];
@@ -8,25 +7,16 @@ $(document).ready(function () {
     var Name = "";
     var State = "";
     var numToPull = 5;
-    var yelp_cnt = 0;
     var grpOffset = 0;
-    var processing = 0;
+    var processing = 1;
+    var lastdeal = "";
 
-    // Clear this out if they need to pull multiple
-    yelp_cnt = 0;
-
+    // Set up the CORS server link
     $.ajaxPrefilter(function (options) {
         if (options.crossDomain && $.support.cors) {
             options.url = 'https://ucsdcodingcampgp1.herokuapp.com/' + options.url;
         }
     });
-
-    /*
-    for (var i = 0; i < numToPull; i++)  // Number of deals to pull
-    {
-        console.log("offset = ", grpOffset);
-    }
-    */
 
     startTheShow();
 
@@ -54,10 +44,16 @@ $(document).ready(function () {
         groupOnSearch(displayObject, processMultiple);
     }
 
-    // This processes multiple entries
+    // This is the call back that processes multiple entries
     function processMultiple (displayObject)
     {
-        console.log("processMultiple: Processing = ", processing);
+        console.log("processMultiple: Processing = ", processing, " grpOffset = ", grpOffset);
+
+        // If the deal is the same as the last one, Groupon is returning a duplicate.  
+        // Process an extra one
+        if (displayObject.deal == lastdeal) 
+            processing = processing - 1;
+        
         // Check if more to process
         if (processing < numToPull)
         {
@@ -69,6 +65,7 @@ $(document).ready(function () {
 
     }
 
+    // This function goes out to Groupon and grabs deals
     function groupOnSearch(data)
     {
         var url = "https://partner-api.groupon.com/deals.json?tsToken=US_AFF_0_201236_212556_0&lat=32.853431&lng=-117.182872&filters=category:food-and-drink&limit=1&offset=" + grpOffset;
@@ -81,7 +78,7 @@ $(document).ready(function () {
             console.log("groupOnSearch: response", response);
             console.log("groupOnSearch: deal array", response.deals.length);
 
-            // Stuff the respoonse
+            // Stuff the respoonse so we don't have to type the response.deals
             saveit = response.deals[0];
             console.log("groupOnSearch: saveit ", saveit);
 
@@ -90,6 +87,7 @@ $(document).ready(function () {
             var City = saveit.options[0].redemptionLocations[0].city;
             var State = saveit.options[0].redemptionLocations[0].state;
 
+            // Debugging
             console.log("groupOnSearch: Groupon data - Name ", Name);
             console.log("groupOnSearch: Groupon data - Street ", Street);
             console.log("groupOnSearch: Groupon data - City ", City);
@@ -97,16 +95,17 @@ $(document).ready(function () {
             console.log("groupOnSearch: Groupon deal -  ", saveit.title);
             console.log("groupOnSearch: Groupon Deal URL ", saveit.dealUrl);
 
-            // Save groupon data
+            // Save groupon data in the object
             data.name = Name;
             data.streetAddress = Street;
             data.city = City;
             data.state = State;
             data.deal = saveit.title;
             data.dealUrl = saveit.dealUrl;
+
             console.log("groupOnSearch: data object ", data);
 
-            // Now get the yelp ID
+            // Call the yelpID now with the Groupon data
             getYelpID(data);
         });
     }
