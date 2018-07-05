@@ -29,10 +29,25 @@
 
     <div class="container">
         <div class="jumbotron jumbotron-fluid">
-        <div class="big-container">
-          <h1 class="display-4">Groupon / Yelp Integration</h1>
-          <p class="lead">Best Place to Find Restaurant Deals</p>
+          <div class="big-container">
+            <h1 class="display-4">Groupon / Yelp Integration</h1>
+            <p class="lead">Best Place to Find Restaurant Deals</p>
+          </div>
         </div>
+
+        <!-- John's zip entry code -->
+        <div>
+          <p>click symbol to use current location</p>
+          <img id="curLoc" src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Ic_my_location_48px.svg">
+          <br>
+          <p>Or enter desired zip</p>
+          <form id="zip-form">
+              <input type="text" id="zipCode" placeholder="Use current location or enter a zip">
+              <input id="getLoc" type="submit" value="Submit">
+          </form> 
+          <br>
+
+          <div id=city></div>
         </div>
 
         <div class="card border-secondary mb-3">
