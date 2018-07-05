@@ -1,0 +1,117 @@
+.jumbotron {
+    background: url(images/hero-01.jpg);
+    height: 520px;
+    width: 100%;
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    padding: 0.7em 1.5em;
+    margin-bottom: 0.5em;
+}
+
+#logo {
+    width: 35%;
+}
+
+#subscribeButton {
+    border: 2px solid black;
+}
+
+.zipCodeDiv {
+    margin: 1% 20% auto;
+}
+
+#locationWord {
+    font-family: 'Comfortaa', cursive;
+}
+
+#currentLocButton {
+    background-color: #85b500;
+    border: #85b500;
+}
+
+.input-group-text {
+    background-color: white;
+    border: white;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.1em;
+}
+
+.form-control {
+    border: white;
+    border-left: 1px solid #85b500;
+    font-size: 1em;
+}
+
+#allDealsButton {
+    border: 4px dashed black;
+    background-color: white;
+    color: #85b500;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.2em;
+}
+
+h3 {
+    font-family: 'Monofett', cursive;
+    font-size: 2.1em;
+    background-color: rgb(222, 236, 187, 0.6);
+    border: none;
+    color: black;
+    margin: 0.5em 0em 0em;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    margin: 0 auto;
+}
+
+.card-img-top {
+    /* border: 3px solid #d39e00; */
+    border: 3px solid white;
+    border-radius: 1.8em;
+    box-shadow: 10px 15px 10px;
+}
+
+.card {
+    /* border:1px solid white; */
+    border: none;
+    border-radius: 1em;
+    padding: 2.4em;
+    background-color: transparent;
+}
+
+.card-deck {
+    border: 2px solid white;
+    border-bottom: none;
+    border-radius: 0;
+    background-color: rgba(255, 232, 0, 0.25);
+    margin: 0 auto;
+}
+
+#quickSelection {
+    border-radius: 1em;
+    /* background-color: rgba(255, 232, 0, 0.25); */
+}
+
+#currentLocation {
+    font-size: 1.5em;
+    font-weight: 900;
+}
+
+#imgHover {
+    background-color: rgb(222, 236, 187, 0.6);
+}
+
+.btn-warning:focus {
+    outline: 0;
+    border: none;
+}
+
+.card-title {
+    border: 2px solid black;
+    margin-bottom: 0;
+    border-radius: 0.3em 0.3em 0 0;
+}
+
+.card-body {
+    border: 2px solid black;
+    border-top: none;
+    border-radius: 0 0 1em 1em;
+}
