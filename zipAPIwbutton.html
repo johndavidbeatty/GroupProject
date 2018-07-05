@@ -9,7 +9,11 @@
     </head>
     <body>
         <p>Use Console to see results </p>
-
+        <br>
+        <p>click symbol to use current location</p>
+        <img id="curLoc" src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Ic_my_location_48px.svg">
+        <br>
+        <p>Or enter desired zip</p>
         <form id="zip-form">
             <input type="text" id="zipCode" placeholder="92131">
             <input id="getLoc" type="submit" value="Submit">
@@ -31,6 +35,14 @@
    var zurl;
    var gurl;
         
+//   This button just uses standard Groupon query which uses current location based on IP when no other location is entered.
+
+$("#curLoc").on("click", function (event) {
+  event.preventDefault();
+  grpnLocStr="";
+  getGroupon(grpnLocStr);
+});
+
     // This segment gets zipcode, and and then processes it into lat and long for Groupon (who doesn't take zip codes :( ))
     // First get the value in the button
 
@@ -39,41 +51,33 @@ $("#getLoc").on("click", function (event) {
 
     zip = $("#zipCode").val().trim();
     console.log("entered zip: ", zip);
-    console.log(parseInt(zip));
 
-    // if they just hit enter, give nothing to ajaz query which then uses the IP of the request to determine location.
+        //  make sure it is a valid zip code (or good enough)
 
-    if (zip==""){
-        grpnLocStr="&";
-        getGroupon(grpnLocStr);
-
-        // Next make sure it is a valid zip code (or good enough)
-
-    } else if ((parseInt(zip)) > 1000 && (parseInt(zip)) < 99951) {
+    if ((parseInt(zip)) > 1000 && (parseInt(zip)) < 99951) {
         zurl = "https://www.zipcodeapi.com/rest/NnhKKXxjVlQfKghOtdW83dPHEUYPi8K41sMduv0tzFaf0M5GitUpmwyv1S3pA9xn/info.json/"+zip+"/degrees";
 
         $.ajax(zurl)
             .then(function (zipOut) {
                 
                 console.log("GPS: ", zipOut);
-                grpnLocStr="&lat="+zipOut.lat+"&lng="+zipOut.lng+"&"
+                grpnLocStr="&lat="+zipOut.lat+"&lng="+zipOut.lng;
                 console.log("Groupon Location String: ", grpnLocStr);
-                console.log("city name: ",zipOut.city)
-                $("#city").text(zipOut.city+", "+zipOut.state)
+                console.log("city name: ",zipOut.city);
+                $("#city").text(zipOut.city+", "+zipOut.state);
 
                 getGroupon(grpnLocStr);
             
             });
     } else {
-        $("#city").text("Please enter a valid US zip or just hit Enter to use your current location")
-
+        $("#city").text("Please enter a valid US zip code")
     };
 
 });
 
 
 function getGroupon(grpnLocStr){
-                    gurl = "https://partner-api.groupon.com/deals.json?tsToken=US_AFF_0_201236_212556_0"+grpnLocStr+"filters=category:food-and-drink&offset=0&limit=1"
+                    gurl = "https://partner-api.groupon.com/deals.json?tsToken=US_AFF_0_201236_212556_0"+grpnLocStr+"&filters=category:food-and-drink&offset=0&limit=1"
                     $.ajax(gurl)
                     .then(function (gresponse) {
                         console.log("Groupon Full",gresponse);
@@ -84,15 +88,6 @@ function getGroupon(grpnLocStr){
 
 
 
-// <!-- 
-
-
-
-//             // YELP
-//             var term="food"
-//             var zip ="92121"
-//             var ylimit =10;
-//             var yurl = 'https://api.yelp.com/v3/businesses/search?limit='+ylimit+'&term='+term+'&location='+zip
 
 
             
@@ -105,19 +100,7 @@ function getGroupon(grpnLocStr){
                 }
             });
             
-//             // ############ GROUPON CODE ###########################
 
-
-
-
-//             // ############ YELP CODE ###########################
-
-
-            
-//             $.ajax(yurl, { headers: { Authorization: 'Bearer IOnOmcVyQA7g8bfItyRwB1JFyfXeJh0kXRqdwyKUjuxOP2LmvLLth68IN84LwKiAUSgtQN5Bikqdnm70id-_Sj_0U5vTewXNl7ycBkUayA45WB-ozhQ2VEq7-6AuW3Yx' }})
-//                 .then(response => console.log('YELP ', response))
-
-//             // ############ ZIP CODE to Lattitude/longitude ###########################
 
 
 
