@@ -337,9 +337,9 @@ function showit (displayObject) {
 
     // clean up output for if business is open or closed
 
-    if (displayObject.open=true){
+    if (displayObject.open){
         var status="now open"
-    } else if (displayObject.open=false){
+    } else if (!displayObject.open){
         var status="closed"
     }else {
         var status="   " 
