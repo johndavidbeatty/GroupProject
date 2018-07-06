@@ -39,7 +39,7 @@ $(document).ready(function () {
         }
         else
         {
-            numToPull = 30;
+            numToPull = 50;
         }
 
         console.log("Food input: numToPull - ", numToPull);
@@ -119,9 +119,10 @@ $(document).ready(function () {
         console.log("processMultiple: Processing = ", processing);
         console.log("processMultiple: Object = ", grpOnArray[processing]);
         console.log("processMultiple: numToPull = ", numToPull);
+        console.log("processMultiple: Groupon Array length", grpOnArray.length);
         
         // Check if more to process
-        if (processing < numToPull)
+        if (processing < numToPull && processing < grpOnArray.length)
         {
             // Call the yelpID now with the Groupon data
             getYelpID(grpOnArray, processMultiple);
@@ -313,8 +314,9 @@ $(document).ready(function () {
                 {
                     for (var i = 0; i < data.categories.length; i++)
                     {
-                        console.log("getYelpData: ", data.categories[i].alias);
-                        if (data.categories[i].alias == food)
+                        console.log("getYelpData: category = ", data.categories[i].alias);
+
+                        if (data.categories[i].alias == food || (food == "japanese" && data.categories[i].alias == "sushi"))
                         {
                             showit(data);
                             break
