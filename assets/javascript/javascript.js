@@ -2,13 +2,14 @@
 
 $(document).ready(function () {
     var saveit = [];
-    var numToPull = 10; // Number of deals we'll show
+    var numToPull = 10; // Number of deals we'll show.  If all, we pull only 10
     var grponPull = 50; // Number we're pulling from Groupon
     var grpOffset = 0;
     var processing = 0;
     var grpnLocStr = "";
     var gresponse = {};
     var inProgress = false;
+    var food = "";
 
     // Set up the CORS server link
     $.ajaxPrefilter(function (options) {
@@ -17,55 +18,65 @@ $(document).ready(function () {
         }
     });
 
-    // This button just uses standard Groupon query which uses current location based
+    //  User clicked on a food category
     //  on IP when no other location is entered.
-
-    $("#curLoc").on("click", function (event) 
+    $(document).on("click", ".food", function() 
     {
         event.preventDefault();
+        console.log("Food input: ");
 
         if (inProgress)
             return;
 
-        grpnLocStr="";
-        startTheShow(grpnLocStr);
-    });
-
-    // This segment gets zipcode, and and then processes it into lat and long for Groupon 
-    // (who doesn't take zip codes :( ))
-    // First get the value in the button
-
-    $("#getLoc").on("click", function (event) 
-    {
-        event.preventDefault();
-
-        if (inProgress)
-            return;
-  
         var zip = $("#zipCode").val().trim();
-        console.log("getLoc: entered zip: ", zip);
-  
-        //  make sure it is a valid zip code (or good enough)
-        if ((parseInt(zip)) > 1000 && (parseInt(zip)) < 99951) 
+        console.log("Food click: entered zip = ", zip);
+        food = $(this).val();
+        console.log("Food click: food = ", food);
+
+        if (food == "all")
         {
-          var zurl = "https://www.zipcodeapi.com/rest/NnhKKXxjVlQfKghOtdW83dPHEUYPi8K41sMduv0tzFaf0M5GitUpmwyv1S3pA9xn/info.json/"+zip+"/degrees";
-  
-          $.ajax(zurl)
-              .then(function (zipOut) 
-              {
-                  console.log("getLoc: GPS: ", zipOut);
-                  grpnLocStr="&lat="+zipOut.lat+"&lng="+zipOut.lng;
-                  console.log("getLoc: Groupon Location String: ", grpnLocStr);
-                  console.log("getLoc: city name: ",zipOut.city);
-                  $("#city").text(zipOut.city+", "+zipOut.state);
-  
-                  startTheShow(grpnLocStr);
-              });
-        } 
-        else 
+            numToPull = 10;
+        }
+        else
         {
-          $("#city").text("Please enter a valid US zip code")
-        };
+            numToPull = 50;
+        }
+
+        console.log("Food input: numToPull - ", numToPull);
+        // If they entered a zipcode, find longitude and latitude to pass to groupon
+        if (zip)
+        {
+            //  make sure it is a valid zip code (or good enough)
+            if ((parseInt(zip)) > 1000 && (parseInt(zip)) < 99951) 
+            {
+                var zurl = "https://www.zipcodeapi.com/rest/NnhKKXxjVlQfKghOtdW83dPHEUYPi8K41sMduv0tzFaf0M5GitUpmwyv1S3pA9xn/info.json/"+zip+"/degrees";
+        
+                $.ajax(zurl)
+                    .then(function (zipOut) 
+                    {
+                        console.log("getLoc: GPS: ", zipOut);
+                        grpnLocStr="&lat="+zipOut.lat+"&lng="+zipOut.lng;
+                        console.log("getLoc: Groupon Location String: ", grpnLocStr);
+                        console.log("getLoc: city name: ",zipOut.city);
+                        $("#city").text(zipOut.city+", "+zipOut.state);
+        
+                        startTheShow(grpnLocStr);
+                    });
+            } 
+            else 
+            {   // **** Annette -- Need to put this error somewhere ****
+                $("#city").text("Please enter a valid US zip code")
+                startTheShow(grpnLocStr);
+            };
+
+
+        }
+        else
+        {   // Use IP to find location
+            grpnLocStr = "";
+            startTheShow(grpnLocStr);
+        }
+
     });
 
     function resetAll ()
@@ -74,7 +85,6 @@ $(document).ready(function () {
         processing = 0;
         grpnLocStr = "";
         gresponse = {};
-        inProgress = false;
         $("#resultsDiv").empty();
     }
 
@@ -85,9 +95,10 @@ $(document).ready(function () {
 
         resetAll();
 
+        $("#working").html("<div style='width:image width px; font-size:80%; text-align:center;'><img src='images/hamburger3.gif' alt='alternate text' width='width' height='height' style='padding-bottom:0.5em;' />Working</div>");
+
         // Set the in progress flag so they can't do another selection until we're done
         inProgress = true;
-
 
         // Kick off the search
         groupOnSearch(grpnLocStr, groupOnComplete);
@@ -107,9 +118,11 @@ $(document).ready(function () {
     {
         console.log("processMultiple: Processing = ", processing);
         console.log("processMultiple: Object = ", grpOnArray[processing]);
+        console.log("processMultiple: numToPull = ", numToPull);
+        console.log("processMultiple: Groupon Array length", grpOnArray.length);
         
         // Check if more to process
-        if (processing < numToPull)
+        if (processing < numToPull && processing < grpOnArray.length)
         {
             // Call the yelpID now with the Groupon data
             getYelpID(grpOnArray, processMultiple);
@@ -118,13 +131,13 @@ $(document).ready(function () {
         else  
         {
             inProgress = false;
-
+            $("#working").empty();
         }
 
     }
 
     // This function goes out to Groupon and grabs deals
-    function groupOnSearch(grpnLocStr,groupOnComplete)
+    function groupOnSearch(grpnLocStr, groupOnComplete)
     {
         var url = "https://partner-api.groupon.com/deals.json?tsToken=US_AFF_0_201236_212556_0" + grpnLocStr + "&filters=category:food-and-drink&limit=" + grponPull + "&offset=" + grpOffset;
 
@@ -150,7 +163,8 @@ $(document).ready(function () {
                     review_count: 0,
                     categories: "",
                     deal: "",
-                    dealUrl: ""
+                    dealUrl: "",
+                    yelpUrl: ""
                 }
 
                 // Stuff the respoonse so we don't have to type the response.deals
@@ -284,11 +298,33 @@ $(document).ready(function () {
                     data.open = response.hours[0].is_open_now;
                 data.review_count = response.review_count;
                 data.categories = response.categories;
+                data.yelpUrl = response.url;
                 
                 console.log("getYelpData: DisplayObject ", data);
 
                 // Here's where we need to call showit
-                showit(data);
+                // If it's the right food category, show it otherwise move on
+                console.log("getYelpData: categories", data.categories, "food = ", food);
+
+                if (food == "all")
+                {
+                    showit(data);
+                }
+                else
+                {
+                    for (var i = 0; i < data.categories.length; i++)
+                    {
+                        console.log("getYelpData: category = ", data.categories[i].alias);
+
+                        if (data.categories[i].alias == food || (food == "japanese" && data.categories[i].alias == "sushi"))
+                        {
+                            showit(data);
+                            break
+                        }
+    
+                    }
+                }
+
                 processing++;  // Move to next array element
                 callback(grpOnArray);
         }); 
