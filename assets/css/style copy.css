@@ -1,0 +1,15 @@
+.big-container {
+    text-align: center;
+    background-color: black;
+    color: white;
+    background-size: cover;
+}
+
+.emp-container {
+    width: 500px;
+    margin: auto;
+}
+
+.jumbotron {
+    background-color: black;
+}

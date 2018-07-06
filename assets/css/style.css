@@ -1,0 +1,58 @@
+.jumbotron{
+    background-color: #ffc107cf;
+    border-radius: 6rem;
+    margin: 1em 1em 1rem;
+    text-align: center;
+    padding: 0.5em 0.5em;
+}
+.card-heading{
+    border-radius: 1em 1em 0 0;
+    background-color: #ffc107cf;
+}
+.card{
+    border-radius: 1em 1em 0.3em 0.3em;
+    margin-bottom: 1em;
+}
+.input-group{
+    text-align: center;
+    margin: 0 auto;
+    width: 50%;
+}
+body{
+    text-align: center;
+}
+h1{
+    padding-top:0.5em;
+}
+h3{
+    color:black;
+    font-weight: 300;
+}
+.display-4{
+    font-size: 2.6em;
+}
+.input-group-text{
+    background-color: #c8eed1;
+}
+.btn-primary{
+    background-color: #d099bd;
+    border-color: transparent;
+}
+
+h8{
+    color:red;
+    font-weight:bold;
+}
+
+h9{
+    color:rgb(202, 161, 25);
+ }
+
+h10{
+    color:green;
+    font-weight:bold;
+    }
+    
+h11{
+        color:grey;  
+    }

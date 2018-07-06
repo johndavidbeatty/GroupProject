@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Combined</title>
+        <script
+  src="http://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <p>Use Console to see results </p>
+
+        <form id="zip-form">
+            <input type="text" id="zipCode" placeholder="92131">
+            <input id="getLoc" type="submit" value="Submit">
+        </form>
+            
+        <br>
+
+        <div id=city></div>
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script>
+   var zip =92121;
+   var grpnLocStr="";
+   var gresponse ={};
+   var zurl;
+   var gurl;
+        
+    // This segment gets zipcode, and and then processes it into lat and long for Groupon (who doesn't take zip codes :( ))
+    // First get the value in the button
+
+$("#getLoc").on("click", function (event) {
+  event.preventDefault();
+
+    zip = $("#zipCode").val().trim();
+    console.log("entered zip: ", zip);
+    console.log(parseInt(zip));
+
+    // if they just hit enter, give nothing to ajaz query which then uses the IP of the request to determine location.
+
+    if (zip==""){
+        grpnLocStr="&";
+        getGroupon(grpnLocStr);
+
+        // Next make sure it is a valid zip code (or good enough)
+
+    } else if ((parseInt(zip)) > 1000 && (parseInt(zip)) < 99951) {
+        zurl = "https://www.zipcodeapi.com/rest/NnhKKXxjVlQfKghOtdW83dPHEUYPi8K41sMduv0tzFaf0M5GitUpmwyv1S3pA9xn/info.json/"+zip+"/degrees";
+
+        $.ajax(zurl)
+            .then(function (zipOut) {
+                
+                console.log("GPS: ", zipOut);
+                grpnLocStr="&lat="+zipOut.lat+"&lng="+zipOut.lng+"&"
+                console.log("Groupon Location String: ", grpnLocStr);
+                console.log("city name: ",zipOut.city)
+                $("#city").text(zipOut.city+", "+zipOut.state)
+
+                getGroupon(grpnLocStr);
+            
+            });
+    } else {
+        $("#city").text("Please enter a valid US zip or just hit Enter to use your current location")
+
+    };
+
+});
+
+
+function getGroupon(grpnLocStr){
+                    gurl = "https://partner-api.groupon.com/deals.json?tsToken=US_AFF_0_201236_212556_0"+grpnLocStr+"filters=category:food-and-drink&offset=0&limit=1"
+                    $.ajax(gurl)
+                    .then(function (gresponse) {
+                        console.log("Groupon Full",gresponse);
+                    });
+
+}
+
+
+
+
+// <!-- 
+
+
+
+//             // YELP
+//             var term="food"
+//             var zip ="92121"
+//             var ylimit =10;
+//             var yurl = 'https://api.yelp.com/v3/businesses/search?limit='+ylimit+'&term='+term+'&location='+zip
+
+
+            
+
+//             // ############ PREFILTER _ THANKS CARL ############################
+
+            $.ajaxPrefilter(function(options) {
+                if (options.crossDomain && $.support.cors) {
+                    options.url = 'https://ucsdcodingcampgp1.herokuapp.com/' + options.url;
+                }
+            });
+            
+//             // ############ GROUPON CODE ###########################
+
+
+
+
+//             // ############ YELP CODE ###########################
+
+
+            
+//             $.ajax(yurl, { headers: { Authorization: 'Bearer IOnOmcVyQA7g8bfItyRwB1JFyfXeJh0kXRqdwyKUjuxOP2LmvLLth68IN84LwKiAUSgtQN5Bikqdnm70id-_Sj_0U5vTewXNl7ycBkUayA45WB-ozhQ2VEq7-6AuW3Yx' }})
+//                 .then(response => console.log('YELP ', response))
+
+//             // ############ ZIP CODE to Lattitude/longitude ###########################
+
+
+
+
+        </script>
+    </body>
+</html>
