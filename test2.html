@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>happy saver, happy eater</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Limelight|Yeseva+One|Monofett" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class=" nav justify-content-end">
+            <button type="button" class="btn btn-warning" id="subscribeButton">Subscribe</button>
+        </div>
+
+        <div class="logoDiv text-center">
+            <img id="logo" src="images/logo.svg">
+        </div>
+
+        <div class="zipCodeDiv">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <a class="btn btn-large btn-primary" id="currentLocButton">
+                        <span id="locationWord">Current </span>
+                        <i class="fas fa-map-marker-alt" id="currentLocation"></i>
+                    </a>
+
+                </div>
+                <input type="number" class="form-control text-center" id="zipCode" placeholder="OR enter a Zip Code">
+                <div class="input-group-append">
+                    <button class="btn food" value="all" id="allDealsButton" type="button">See All</button>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="quickSelection" class="text-center"> -->
+        <div class="container">
+        <h3 class="text-center">-Quick Selection Menu-</h3>
+        <!-- </div> -->
+
+        <div class="card-deck">
+            <div class="card">
+                <!-- <img class="card-img-top" src="images/pizza.jpg" alt="Card image cap" onmouseover="src='images/glass.svg',id='imgHover'" onmouseout="src='images/pizza.jpg'"> -->
+                <input type="image" src="images/pizza.jpg" class="food btn-warning card-img-top" id="searchPizza" value="pizza" onmouseover=" src='images/pizzaHover.svg', id='imgHover'"
+                    onmouseout="src='images/pizza.jpg'" />
+            </div>
+            <div class="card">
+                <input type="image" src="images/chinese.jpg" class="food btn-warning card-img-top" id="searchChinese" value="chinese" onmouseover=" src='images/chineseHover.svg', id='imgHover'"
+                    onmouseout="src='images/chinese.jpg'" />
+            </div>
+            <div class="card">
+                <input type="image" src="images/sushi.jpg" class="food btn-warning card-img-top" id="searchJapanese" value="japanese" onmouseover=" src='images/japaneseHover.svg', id='imgHover'"
+                    onmouseout="src='images/sushi.jpg'" />
+            </div>
+            <div class="card">
+                <input type="image" src="images/taco.jpg" class="food btn-warning card-img-top" id="searchMexican" value="mexican" onmouseover=" src='images/mexicanHover.svg', id='imgHover'"
+                    onmouseout="src='images/taco.jpg'" />
+
+            </div>
+        </div>
+        </div>
+
+
+    </div>
+    </div>
+
+    <div>
+        <div id="working"></div>
+        <br>
+    </div>
+    <div class="container">
+        <div class="card card-primary " style="width:100%;">
+            <div class="card-heading" style="color: white; width:100%;">
+                <h3 class="card-title text-center">
+                   Available Deals <i class="fas fa-utensils"></i>
+                </h3>
+            </div>
+            <div class="card-body" id="resultsDiv">
+            </div>
+        </div>
+
+</div>
+
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js" type="text/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script type="text/javascript" src="assets/javascript/test1.js"></script>
+
+</body>
+
+</html>
