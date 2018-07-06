@@ -95,7 +95,7 @@ $(document).ready(function () {
 
         resetAll();
 
-        $("#working").html("<div style='width:image width px; font-size:80%; text-align:center;'><img src='images/hamburger3.gif' alt='alternate text' width='width' height='height' style='padding-bottom:0.5em;' />Working</div>");
+        $("#working").html("<div style='width:image width px; font-size:80%; text-align:center;'><img src='images/hamburger3.gif' alt='working' width='75px' height='75px' style='padding-bottom:0.0em;' /><h7>  Searching for your best deals...</h7></div><br>");
 
         // Set the in progress flag so they can't do another selection until we're done
         inProgress = true;
@@ -356,7 +356,7 @@ function showit (displayObject) {
     else if (displayObject.rating < 3.8 ) {revImg="./images/35.png"}
     else if (displayObject.rating < 4.25 ) {revImg="./images/4.png"}
     else if (displayObject.rating < 4.8 ) {revImg="./images/45.png"}
-    else if (displayObject.rating <= 5 ) {revImg="./images/45.png"}
+    else if (displayObject.rating <= 5 ) {revImg="./images/5.png"}
     else  {revImg="./images/unknown.png"}
 
 
@@ -377,7 +377,8 @@ function showit (displayObject) {
 
     // write values out to Div in a bootstrap table.
 
-    $("#resultsDiv").append(`<tr><td><h8>${displayObject.name}</h8>  <img src=${revImg} title="Avg. review, click to go to Yelp review page">
+    $("#resultsDiv").append(`<tr><td><h8>${displayObject.name}</h8>  
+    <a href='${displayObject.yelpUrl}' target='_blank'><img src=${revImg} title="Avg. review, click to go to Yelp page">
     <h9 title="number of reviews">(${displayObject.review_count})</h9><img src=./images/dollar.png title="cost:" alt="cost:">
     <h10 title="cost">       ${displayObject.price}</h10>
     <h11 title="if business is open now">   ${status}<h/11>
