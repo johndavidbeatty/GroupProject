@@ -1,3 +1,8 @@
+body {
+    background-color: rgba(216, 221, 202, 0.7);
+}
+
+
 .jumbotron {
     background: url(images/hero-01.jpg);
     height: 520px;
@@ -122,10 +127,17 @@ h3 {
     border-top: none;
     border-radius: 0 0 1em 1em;
 }
+h7 {
+color:black;
+font-family: 'Comfortaa', cursive;
+font-weight: bold;
+font-size: 200%;
 
+}
 h8{
     color:red;
     font-weight:bold;
+    font-size: 150%;
 }
 
 h9{
@@ -135,6 +147,9 @@ h9{
 h10{
     color:green;
     font-weight:bold;
+ }
+ #working {
+     margin-top:10px;
  }
 
 h11{
