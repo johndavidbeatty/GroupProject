@@ -38,3 +38,21 @@ h3{
     background-color: #d099bd;
     border-color: transparent;
 }
+
+h8{
+    color:red;
+    font-weight:bold;
+}
+
+h9{
+    color:rgb(202, 161, 25);
+ }
+
+h10{
+    color:green;
+    font-weight:bold;
+    }
+    
+h11{
+        color:grey;  
+    }

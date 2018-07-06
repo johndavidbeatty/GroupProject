@@ -334,20 +334,53 @@ $(document).ready(function () {
 }); // On document ready
 
 function showit (displayObject) {
-    console.log("showit:  Displaying data");
+
+    // clean up output for if business is open or closed
+
+    if (displayObject.open=true){
+        var status="now open"
+    } else if (displayObject.open=false){
+        var status="closed"
+    }else {
+        var status="   " 
+    };
+
+    // develop number of review stars to show
+
+    if (displayObject.rating < .8) {revImg="./images/0.png"} 
+    else if (displayObject.rating < 1.25 ) {revImg="./images/1.png"} 
+    else if (displayObject.rating < 1.8 ) {revImg="./images/15.png"}
+    else if (displayObject.rating < 2.25 ) {revImg="./images/2.png"}
+    else if (displayObject.rating < 2.8 ) {revImg="./images/25.png"}
+    else if (displayObject.rating < 3.25 ) {revImg="./images/3.png"}
+    else if (displayObject.rating < 3.8 ) {revImg="./images/35.png"}
+    else if (displayObject.rating < 4.25 ) {revImg="./images/4.png"}
+    else if (displayObject.rating < 4.8 ) {revImg="./images/45.png"}
+    else if (displayObject.rating <= 5 ) {revImg="./images/45.png"}
+    else  {revImg="./images/unknown.png"}
+
+
+    // clean up output for when there is no price defined.
+
+    if (typeof displayObject.price==="undefined") {
+        displayObject.price="?"
+    };
+
+    // create clickable link for deal with deal details
 
     var divIt = "<a href='" + displayObject.dealUrl + "' target='_blank'>" + displayObject.deal + "</a>";
 
-    console.log("showit: DivIt = ", divIt);
+    // create map link using address
 
-    // *** need to work in here *** //
+    var googMap= "https://www.google.com/maps/search/?api=1&query="+(encodeURIComponent(displayObject.streetAddress+"+"+displayObject.city+"+"+displayObject.state));
+    var mapIt = "<a href='" + googMap + "' target='_blank'><img src=./images/map.png title='open map' alt='map'></a>";
 
-    $("#resultsDiv").append(`
-    <tr><td>${displayObject.name}</td>
-    <td>${displayObject.streetAddress}</td>
-    <td>${displayObject.rating}</td>
-    <td>${displayObject.price}</td>
-    <td>${displayObject.open}</td>
-    <td>${displayObject.review_count}</td>
-    <td>${divIt}</td></tr>`);
-}
+    // write values out to Div in a bootstrap table.
+
+    $("#resultsDiv").append(`<tr><td><h8>${displayObject.name}</h8>  <img src=${revImg} title="Avg. review, click to go to Yelp review page">
+    <h9 title="number of reviews">(${displayObject.review_count})</h9><img src=./images/dollar.png title="cost:" alt="cost:">
+    <h10 title="cost">       ${displayObject.price}</h10>
+    <h11 title="if business is open now">   ${status}<h/11>
+    <h12 title="open Google Map of location">    ${mapIt}</h12><br>
+    ${divIt} </td></tr>`)
+};
