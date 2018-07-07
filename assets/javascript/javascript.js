@@ -95,7 +95,7 @@ $(document).ready(function () {
 
         resetAll();
 
-        $("#working").html("<div style='width:image width px; font-size:80%; text-align:center;'><img src='images/hamburger3.gif' alt='working' width='75px' height='75px' style='padding-bottom:0.0em;' /><h7>  Searching for your best deals...</h7></div><br>");
+        $("#working").html("<div style='width:image width px; font-size:80%; text-align:center;'><img src='images/hamburger3.gif' alt='working' width='75px' height='60px' style='padding-bottom:0.0em;' /><h7>  <i class='fas fa-angle-double-down'></i> Searching for your best deals... <i class='fas fa-angle-double-down'></i></h7></div><br>");
 
         // Set the in progress flag so they can't do another selection until we're done
         inProgress = true;
