@@ -2,7 +2,6 @@ body {
     background-color: rgba(216, 221, 202, 0.7);
 }
 
-
 .jumbotron {
     background: url(images/hero-01.jpg);
     height: 520px;
@@ -15,15 +14,14 @@ body {
 
 #logo {
     width: 35%;
-    margin-bottom: 0.8em;
+    margin-bottom: 1.1em;
     margin-top: 2em;
 }
 
 #subscribeButton {
     border: 2px solid black;
-    background-color:#ffd105;
+    background-color: #ffd105;
 }
-
 
 /* .card > #allDealsButton{
     padding: 0.32em;
@@ -45,30 +43,55 @@ body {
     font-size: 1.1em;
 }
 
+.input-group-append {
+    border-radius: 2em;
+}
+
+.btn.disabled,
+.btn:disabled {
+    opacity: 1;
+}
+
+button.btn.btn-light.disabled {
+    border-top-left-radius: 0.25em;
+    border-bottom-left-radius: 0.25em;
+}
+
+.btn-light {
+    color: #666;
+    font-weight: 600;
+}
+
+.input-group {
+    background-color: rgba(0, 0, 0, .075);
+    flex-wrap: nowrap;
+    margin: 2% 5% 0 25%;
+    width: 50%;
+}
 
 .form-control {
     border: white;
-    border-left: 2px solid #85b500;
-    border-right: 2px solid #85b500;
     font-size: 1em;
-    margin: 2% 23% auto;
-
+    /* margin: 2% 23% auto; */
 }
 
-
-.btn-warning{
+.btn-warning {
     background-color: rgb(222, 236, 187, 0.7);
 }
+
 h3 {
-    font-family: 'Monofett', cursive;
+    font-family: 'Limelight', cursive;
     font-size: 2.3em;
-    background-color: rgb(222, 236, 187, 0.6);
-    border: none;
+    border-bottom: 2px solid white;
     color: black;
     margin: 0.5em 0em 0em;
+    margin: 0 auto;
+}
+
+.zipCodeField {
     border-left: 2px solid white;
     border-right: 2px solid white;
-    margin: 0 auto;
+    background-color: rgba(222, 226, 230, 0.34);
 }
 
 .card-img-top {
@@ -76,7 +99,6 @@ h3 {
     border: 3px solid white;
     border-radius: 1.8em;
     box-shadow: 10px 15px 10px;
-   
 }
 
 .card {
@@ -89,13 +111,12 @@ h3 {
 }
 
 .card-deck {
-    border: 2px solid white;
-    border-bottom: none;
     border-radius: 0;
-    background-color: rgba(0,0,0,.075);
     margin: 0 auto;
     padding-bottom: 1.5em;
-    padding-top: 0.2em;
+    padding-top: 0;
+    ;
+    flex-direction: row;
 }
 
 #quickSelection {
@@ -118,41 +139,38 @@ h3 {
 }
 
 .card-title {
-    border: 2px solid black;
+    border-bottom: 2px dashed black;
     margin-bottom: 0;
-    border-radius: 0.3em 0.3em 0 0;
 }
 
-.card-body {
-    border: 2px solid black;
-    border-top: none;
-    border-radius: 0 0 1em 1em;
+.card-primary {
+    border: 1px solid black;
+    border-radius: 1em 1em 1em 1em;
+    margin-top: 1.5em;
 }
+
 h7 {
-color:black;
-font-family: 'Comfortaa', cursive;
-font-weight: bold;
-font-size: 200%;
-
+    color: black;
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+    font-size: 200%;
 }
-h8{
-    color:red;
-    font-weight:bold;
+
+h8 {
+    color: red;
+    font-weight: bold;
     font-size: 150%;
 }
 
-h9{
-    color:rgb(202, 161, 25);
- }
+h9 {
+    color: rgb(202, 161, 25);
+}
 
-h10{
-    color:green;
-    font-weight:bold;
- }
- #working {
-     margin-top:10px;
- }
+h10 {
+    color: green;
+    font-weight: bold;
+}
 
-h11{
-        color:grey;  
+h11 {
+    color: grey;
 }
