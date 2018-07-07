@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Happy saver, Happy eater</title>
+    <title>SAVEaters</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
@@ -35,18 +35,18 @@
             </div>
         </div> -->
         <!-- <div id="quickSelection" class="text-center"> -->
-        <div class="container">
+        <div class="container zipCodeField text-center">
 
-            <h3 class="text-center">-Enter a zip code to start-</h3>
-            <!-- </div> -->
+            <h3 class="text-center">Good Meal + Better Deal</h3>
+
+            <div class="input-group">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-light disabled">Enter Zip Code</button>
+                </div>
+                <input type="text" class="form-control text-center" id="zipCode" placeholder="Blank = Current Location">
+            </div>
 
             <div class="card-deck">
-                <div class="input-group">
-                    <input type="ntext" class="form-control text-center" id="zipCode" placeholder="Enter zip code (or leave blank to use current location)">
-                    <!-- <div class="input-group-append">
-                                <button class="btn" id="allDealsButton" type="button">See All</button>
-                            </div> -->
-                </div>
 
                 <div class="card">
 
@@ -56,8 +56,8 @@
 
                 </div>
                 <div class="card">
-                    <input type="image" src="images/JapaneseHover.svg" class="food btn-warning card-img-top" id="searchJapanese" value ="japanese" onmouseover=" src='images/sushi.jpg', id='imgHover'"
-                        onmouseout="src='images/JapaneseHover.svg'" />
+                    <input type="image" src="images/JapaneseHover.svg" class="food btn-warning card-img-top" id="searchJapanese" value="japanese"
+                        onmouseover=" src='images/sushi.jpg', id='imgHover'" onmouseout="src='images/JapaneseHover.svg'" />
                 </div>
                 <div class="card">
 
@@ -67,22 +67,23 @@
                 </div>
 
                 <div class="card">
-                    <input type="image" src="images/chineseHover.svg" class="food btn-warning card-img-top" id="searchChinese" value="chinese" onmouseover=" src='images/chinese.jpg', id='imgHover'"
-                        onmouseout="src='images/chineseHover.svg'" />
+                    <input type="image" src="images/chineseHover.svg" class="food btn-warning card-img-top" id="searchChinese" value="chinese"
+                        onmouseover=" src='images/chinese.jpg', id='imgHover'" onmouseout="src='images/chineseHover.svg'" />
                 </div>
 
                 <div class="card">
-                    <input type="image" src="images/mexicanHover.svg" class="food btn-warning card-img-top" id="searchMexican" value="mexican" onmouseover=" src='images/taco.jpg', id='imgHover'"
-                        onmouseout="src='images/mexicanHover.svg'" />
+                    <input type="image" src="images/mexicanHover.svg" class="food btn-warning card-img-top" id="searchMexican" value="mexican"
+                        onmouseover=" src='images/taco.jpg', id='imgHover'" onmouseout="src='images/mexicanHover.svg'" />
 
                 </div>
 
             </div>
+            <!-- <div id="working"></div> -->
         </div>
-
-
-
     </div>
+
+
+
 
 
     <div class="container">
@@ -91,20 +92,22 @@
                 <h3 class="card-title text-center">
                     Available Deals
                     <i class="fas fa-utensils"></i>
-                </h3>        
-  
-            </div>    
-                <div id="working"></div>    <!-- John's new div -->
+                </h3>
+                <div id="working"></div>
+            </div>
+
+            <!-- John's new div -->
             <div class="card border-secondary mb-3">
                 <div class="card-body text-secondary">
-                        <table class="table table-striped">
-                                <tbody id="resultsDiv">
-                                </tbody>
-                              </table>
-    
-                </div>
-        </div>
+                    <table class="table table-striped">
+                        <tbody id="resultsDiv">
+                        </tbody>
+                    </table>
 
+                </div>
+            </div>
+
+        </div>
     </div>
 
 
