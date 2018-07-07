@@ -20,7 +20,7 @@ var database = firebase.database();
 $(document).ready(function () {
     var saveit = [];
     var numToPull = 10; // Number of deals we'll show.  If all, we pull only 10
-    var grponPull = 50; // Number we're pulling from Groupon
+    var grponPull = 100; // Number we're pulling from Groupon
     var grpOffset = 0;
     var processing = 0;
     var grpnLocStr = "";
@@ -57,7 +57,7 @@ $(document).ready(function () {
         }
         else
         {
-            numToPull = 50;
+            numToPull = 100;
         }
 
         console.log("Food input: numToPull - ", numToPull);
@@ -146,10 +146,11 @@ $(document).ready(function () {
                 testObj = snapshot.val();
                 console.log("processMultiple: testObj = ", testObj);
 
+                // Not in the cache
                 if (testObj == null)
                 {
-                    processing++;
-                    processMultiple(grpOnArray);
+                    // Call the yelpID now with the Groupon data
+                    getYelpID(grpOnArray);
                 }
                 else
                     getYelpData(testObj, grpOnArray, processMultiple);
@@ -168,7 +169,7 @@ $(document).ready(function () {
     // This function goes out to Groupon and grabs deals
     function groupOnSearch(grpnLocStr, groupOnComplete)
     {
-        var url = "https://partner-api.groupon.com/deals.json?tsToken=US_AFF_0_201236_212556_0" + grpnLocStr + "&filters=category:food-and-drink&limit=" + grponPull + "&offset=" + grpOffset;
+        var url = "https://partner-api.groupon.com/deals.json?tsToken=US_AFF_0_201236_212556_0" + grpnLocStr + "&filters=category:food-and-drink&limit=" + grponPull + "&offset=" + grpOffset + "&radius=50";
 
         $.ajax(url)
         .then(function (response) 
@@ -254,6 +255,54 @@ $(document).ready(function () {
         });
     }
  
+    function getYelpID(grpOnArray)
+    {
+        var data = grpOnArray[processing];
+        var Name = encodeURIComponent(data.name.trim());
+        var Street = encodeURIComponent(data.streetAddress.trim());
+        var City = encodeURIComponent(data.city.trim());
+        var State = data.state;
+
+        var term = "name=" + Name;
+        var url = 'https://api.yelp.com/v3/businesses/matches?' + term + '&address1=' + Street + '&city=' + City + '&state=' + State + '&country=US'
+        console.log("getYelpID: URL: ", url)
+
+        // $.ajax(url, { headers: { Authorization: 'Bearer IOnOmcVyQA7g8bfItyRwB1JFyfXeJh0kXRqdwyKUjuxOP2LmvLLth68IN84LwKiAUSgtQN5Bikqdnm70id-_Sj_0U5vTewXNl7ycBkUayA45WB-ozhQ2VEq7-6AuW3Yx' }})
+        $.ajax(url, { headers: { Authorization: 'Bearer s8fyDTIEAcaKIhVHE-YXji0_G6gyCKWLxbwwL5Hg1PQW-Eu_ErKZ-xeV0_xRqQ0VtEV7XpS540SpNB9q4aQkcW-fp43IhgOgfh0fHP_d8YdNVHCqqxgMCBDQ8_U6W3Yx' } })
+            .then(function (response)
+            {
+                console.log("getYelpID: Yelp response", response);
+                console.log("getYelpID: Yelp array", response.businesses.length);
+                if (response.businesses.length > 0)
+                {
+                    data.yelpID = response.businesses[0].id;
+                    console.log("getYelpID: Yelp ID: ", data.yelpID);
+                    console.log("getYelpID: grpOnArray : ", data);
+
+                    // Got the yelp ID, now get the yelp rich data
+                    getYelpData(grpOnArray[processing], grpOnArray, processMultiple);
+                }
+                else
+                {
+                    console.log("getYelpID: Can't find this business - ", data.name);
+                    // Take it out of the Groupon Array and process the next element
+                    grpOnArray.splice (processing, 1);
+                    processMultiple(grpOnArray);
+                }
+            },
+
+            // Error processing here
+            function()
+            {
+                console.log("getYelpID: Yelp returned error - ", data.name);
+
+                // Take it out of the Groupon Array and process the next element
+                grpOnArray.splice (processing, 1);
+                processMultiple(grpOnArray);
+            }
+        );
+    }
+
     // Here we're just processing and showing the combined data
     function getYelpData(data, grpOnArray, callback)
     {
