@@ -12,8 +12,13 @@ The time to grab the groupon discounts and then the associated yelp information 
 
 The front-end uses high-resolution graphics and bootstrap for a full desktop experience.
 
-
 Per Joey’s suggestion, we used cors-anywhere to work around current browser single-origin security rules.
 
-Originally
+We've also added a version that cache's hits in a firebase DB.  This isn't our primary because it does require pre-populating the cache which is currently a manual process.
+Design_fast.html, checks for the cache and then, in the event of a miss, grabs the data through yelp.
+Our backlog is to make a node.js version of the pre-population app.
+
+the stuff.html app is the tool to pre-populate data.
+
+
 

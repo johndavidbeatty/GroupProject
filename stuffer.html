@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stuffer App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Limelight|Yeseva+One|Monofett" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="./assets/css/stuffstylesheet.css">
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyC74IgNPlw2kLc-GxhkbpuaMSDWCKcV3CM",
+        authDomain: "saveats-31989.firebaseapp.com",
+        databaseURL: "https://saveats-31989.firebaseio.com",
+        projectId: "saveats-31989",
+        storageBucket: "saveats-31989.appspot.com",
+        messagingSenderId: "239689728060"
+    };
+    firebase.initializeApp(config);
+    </script>
+
+
+
+
+</head>
+
+
+<body>
+
+
+    <div class="jumbotron">
+        <!-- <div class=" nav justify-content-end">
+            <button type="button" class="btn btn-warning" id="subscribeButton">Subscribe</button>
+        </div> -->
+
+        <div class="logoDiv text-center">
+            <img id="logo" src="images/logo.svg">
+        </div>
+
+        <!-- <div class="zipCodeDiv">
+
+            <div class="input-group mb-3">
+                <input type="number" class="form-control text-center" placeholder="Leave it BLANK to use current location">
+                <div class="input-group-append">
+                    <button class="btn" id="allDealsButton" type="button">See All</button>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div id="quickSelection" class="text-center"> -->
+        <div class="container">
+
+            <h3 class="text-center">-Enter a zip code to cache-</h3>
+            <!-- </div> -->
+
+            <div class="card-deck">
+                <div class="input-group">
+                    <input type="ntext" class="form-control text-center" id="zipCode" placeholder="Enter zip code to cache">
+                    <br>
+                    <input id="allDealsButton" class="food" value="all" type="submit">
+                    <!-- <div class="input-group-append">
+                                <button class="btn" id="allDealsButton" type="button">See All</button>
+                            </div> -->
+                </div>
+
+
+                <div class="card">
+
+                                <form id="stuff-form">
+                                        <!-- <input type="text" id="zipCode" placeholder="Stuff Cache"> -->
+
+                                </form>
+
+
+                    <!-- <input type="image" src="images/allDeals.svg" class="food btn-warning card-img-top" id="allDealsButton" value="all" onmouseover=" src='https://media.giphy.com/media/3o7btUDtnx3gTwIlmo/giphy.gif', id='imgHover'"
+                        onmouseout="src='images/allDeals.svg'" /> -->
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="container">
+        <div class="card card-primary " style="width:100%;">
+            <div class="card-heading" style="color: white; width:100%;">
+                <h3 class="card-title text-center">
+                    Deals Being Put in Cache:
+                    <i class="fas fa-utensils"></i>
+                </h3>        
+  
+            </div>    
+                <div id="working"></div>    <!-- John's new div -->
+            <div class="card border-secondary mb-3">
+                <div class="card-body text-secondary">
+                        <table class="table table-striped">
+                                <tbody id="resultsDiv">
+                                </tbody>
+                              </table>
+    
+                </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js" type="text/javascript"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script> -->
+    <script type="text/javascript" src="assets/javascript/stufferjavascript.js"></script>
+</body>
+
+</html>
